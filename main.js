@@ -1,12 +1,8 @@
+var configure = require("./lib/configure/configure");
+var generate = require("./lib/generate/generate");
 
-module.exports = {
-	
-	generate: require("./lib/generate/generate"),
-	configured: require("./lib/configured/configured"),
-	find: require("./lib/find/find"),
-	generators: {
-		html : require("./lib/generators/html/html")
-	},
-	process: require("./lib/process/process"),
-	tag: require("./lib/tags/tags")
+module.exports = function(pathToPackageJSON, siteConfig){
+	return configure(pathToPackageJSON, siteConfig).then(function(siteConfig){
+		return generate(siteConfig);
+	});
 };

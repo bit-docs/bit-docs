@@ -1,7 +1,7 @@
 {
-  "name": "documentjs",
+  "name": "bit-docs",
   "description": "The sophisticated JavaScript documentation engine.",
-  "version": "0.4.4",
+  "version": "0.0.1",
   "maintainers": [
     {
       "name": "Bitovi",
@@ -15,7 +15,6 @@
   },
   "scripts": {
     "test": "mocha test.js --reporter spec",
-    "postinstall": "install-engine-dependencies",
     "publish": "git push origin && git push origin --tags",
     "release:prerelease": "npm version prerelease && npm publish",
     "release:patch": "npm version patch && npm publish",
@@ -33,8 +32,6 @@
     "bit-docs-process-tags": "^0.0.4",
     "chokidar": "^1.0.0-rc5",
     "cross-spawn-async": "^2.1.9",
-    "documentjs-github-download": "^0.3.0",
-    "engine-dependencies": "^0.2.0",
     "enpeem": "^2.1.0",
     "fs-extra": "^0.24.0",
     "glob": "~6.0.3",
@@ -43,37 +40,6 @@
     "minimatch": "~1.0.0",
     "q": "~1.0.1",
     "yargs": "^1.3.1"
-  },
-  "engineDependencies": {
-    "node": {
-      "0.10.x": {
-        "devDependencies": {
-          "zombie": "^3.1.1"
-        }
-      },
-      "0.12.x": {
-        "devDependencies": {
-          "zombie": "^3.1.1"
-        }
-      },
-      "^4.0.0": {
-        "devDependencies": {
-          "zombie": "^4.2.1"
-        }
-      },
-      "^5.0.0": {
-        "devDependencies": {
-          "zombie": "^4.2.1"
-        }
-      }
-    },
-    "iojs": {
-      "^3.0.0": {
-        "devDependencies": {
-          "zombie": "^4.1.0"
-        }
-      }
-    }
   },
   "system": {
     "npmDependencies": []

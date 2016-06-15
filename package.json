@@ -10,6 +10,9 @@
     }
   ],
   "main": "main.js",
+  "bin": {
+    "bit-docs": "./bin/bit-docs"
+  },
   "scripts": {
     "test": "mocha test.js --reporter spec",
     "publish": "git push origin && git push origin --tags",

@@ -2,32 +2,25 @@
 
 var yargs = require("yargs");
 
-var configured = require("../lib/configured/configured");
+var bitDocs = require("../main");
 var only = require("../lib/cmd/only");
 var _ = require("lodash");
-
+var path = require("path");
 
 var argv = yargs
-	.usage("Usage: documentjs [site|version][@source]")
-	.example("documentjs","Generate every site and version in documentjs.json.")
-	.example("documentjs api","Generate only the api site.")
-	.example("documentjs api 2.0.0","Generate the api site and the 2.0.0 version.")
-	.example("documentjs 2.0.0@../dir","Only the 2.0.0 version but loaded from ../dir.")
-	
+	.usage("Usage: bit-docs [site|version][@source]")
+	.example("bit-docs","Generate what's in package.json's 'bit-docs' setting.")
+
 	.string("_")
-	
-	.alias("w","watch")
-	.describe("w","Watch files and regenerate on changes")
-	.boolean("w")
-	
+
 	.alias("f","forceBuild")
 	.describe("f","Force rebuilding the templates, js, and css.")
 	.boolean("f")
-	
+
 	.alias("d","debug")
 	.describe("d","Turn on debugging output.")
 	.boolean("d")
-	
+
 	.alias("h","help")
 	.help("h")
 	.argv;
@@ -40,4 +33,4 @@ if(options._.length){
 }
 delete options._;
 
-configured.generateProject({path: process.cwd()}, undefined, options).done();
+bitDocs(path.join(process.cwd(), "package.json"), options).done();

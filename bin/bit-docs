@@ -21,6 +21,13 @@ var argv = yargs
 	.describe("d","Turn on debugging output.")
 	.boolean("d")
 
+	.alias("t","testFinder")
+	.describe("t","Test the finder's output.")
+	.boolean("t")
+
+	.describe("makeDocMap","Create a docMap.json only")
+	.boolean("makeDocMap")
+
 	.alias("h","help")
 	.help("h")
 	.argv;

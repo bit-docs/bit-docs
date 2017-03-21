@@ -75,27 +75,55 @@ Look at the `.gitignore` of this repo; you'll notice an entry for `lib/configure
 
 Using npm under the hood means things like the `file://` syntax in the `bit-docs` configuration for `dependencies` is fair game, which can be useful for local debugging of bit-docs plugins.
 
-### Types of Plugins
+### Plugins
 
-There are two primary types of plugins: "finders" and "generators".
+There are four handlers that any given bit-docs plugin can hook into, and a plugin could hook into all of these actions at once, but following the unix philosophy, bit-docs plugins should strive to do one thing only, and do it well. Therefore, most plugins will only hook into one or two of these handlers to accomplish their intended task.
 
-#### Finders
+#### Finder
 
-Finder plugins find files to slurp in; see the default finder:
+Plugins that hook into the `finder` handler affect how bit-docs searches for source files.
+
+The default finder supports glob syntax, and should be sufficient for most use-cases:
 
 - <https://github.com/bit-docs/bit-docs-glob-finder>
 
-#### Generators
+You might need to create a plugin that hooks into the `finder` handler if you're pulling source from a database or some other location not on the working filesystem.
 
-Generator plugins build finalized files to be spit out:
+### Processor
+
+Plugins that hook into the `processor` handler augment how found files are processed.
+
+By default, the following plugin is included by default in the core of bit-docs:
+
+- <https://github.com/bit-docs/bit-docs-process-tags>
+
+This is because that plugin provides the extremely common task of processing "tags". A tag is an identifier, usually embedded in source code comments, that provides documentation or information about some functionality, inline in the source code itself. Some default tags are:
+
+- `@add`
+- `@body`
+- `@description`
+- `@hide`
+- `@parent`
+
+For an example of a processor plugin that's not included by default, see:
+
+- <https://github.com/bit-docs/bit-docs-process-mustache>
+
+#### Generator
+
+Plugins that hook into the `generator` handler output something from the processed data.
+
+For example, see these bit-docs plugins that output HTML files:
 
 - <https://github.com/bit-docs/bit-docs-generate-html>
 - <https://github.com/bit-docs/bit-docs-html-toc>
 - <https://github.com/bit-docs/bit-docs-generate-readme>
 
-#### Modifiers
+#### Tag
 
-Modifier plugins add non-critical functionality, such as making the output pretty:
+Plugins that hook into the "tag" handler add new tags like `@yourtag` to the default processing that bit-docs already does to source file comments.
+
+For example, see these bit-docs plugins for prettifying source-code snippets:
 
 - <https://github.com/bit-docs/bit-docs-prettify>
 - <https://github.com/bit-docs/bit-docs-html-highlight-line>
@@ -106,9 +134,11 @@ Find more plugins at the [bit-docs organization on GitHub](https://github.com/bi
 
 When bit-docs gets run, the following flow happens:
 
-- `bit-docs/bin/bit-docs` is triggered and passed flags are parsed as options.
+- `bit-docs/bin/bit-docs` is triggered, and passed command flags are parsed as options.
 	- Next, the module export in `main.js` is called with the `package.json` path and options.
 - `main.js` uses `lib/configure/configure.js` to get a `siteConfig` which is passed to `lib/generate/generate.js`.
+	- `configure.js` will install plugin packages defined in the `bit-docs` section of `package.json`.
+	- Next, `configure.js` will allow each installed plugin to register itself to whatever handlers.
 - `generate.js` takes that configuration and passes it to those plugins registered as "generator" plugins.
 
 ## Contributing

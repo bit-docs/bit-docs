@@ -10,11 +10,11 @@ Loosely based on ideas and lessons learned from [DocumentJS](http://documentjs.c
 
 ## High-Level Overview
 
-Fundamentally, the `bit-docs` tool (this repo) orchestrates "finder" plugins that help "suck in" raw data and "generator" plugins that help "spit out" structured documents from that data. The `bit-docs` tool sits happily between such plugins.
+The `bit-docs` tool (this repo) orchestrates "finder" plugins that slurp in raw data with "processor" and "generator" plugins that spit out structured documents from that data. The `bit-docs` tool sits happily between such plugins, automating their install and cooperation.
 
-Depending on what plugins are used, input may be in the form of inline code comments, markdown files, or anything else you could imagine; output may be in the form of HTML, or any other format.
+Depending on the plugins used, input may be in the form of inline code comments, markdown files, or anything else you could imagine; output may be in the form of HTML, or any other format.
 
-You could write "finder" and "generator" plugins for the `bit-docs` tool to orchestrate that are geared towards static site generation (such as a blog or generic website), but `bit-docs` is particularly useful for generating documention websites from your code projects.
+You could write "finder" and "generator" plugins for the `bit-docs` tool geared towards static site generation for a blog or generic website, but `bit-docs` is particularly useful for generating documention websites from and for code projects.
 
 ### Projects currently using bit-docs
 
@@ -24,7 +24,9 @@ You could write "finder" and "generator" plugins for the `bit-docs` tool to orch
 
 ### Usage 
 
-It is possible to add bit-docs as a dependency to the actual repo you wish to document, but we have found creating an entirely new repo that will pull in the repo(s) that you wish to document is a better paradigm. It is especially useful to have a repository dedicated to generating documentation with bit-docs when pulling in multiple codebases, perhaps including their multiple versions, and wishing to generate a unified website. This is the strategy used by StealJS and DoneJS.
+It is possible to add the bit-docs package as a dependency to the actual project you wish to document, but we have found creating an entirely new dedicated repository that will pull in the codebase(s) that you wish to document is a better paradigm. So, for `your-project` you might create a new repository called `your-project-site`.
+
+This paradigm of creating a repository dedicated to generating documentation with bit-docs is especially useful when pulling in multiple codebases and wishing to generate a unified website. This is the strategy used by StealJS and DoneJS to document their core functionality and the functionality of their various modules that are broken out into separate repos and packages!
 
 To use bit-docs, add it to the `package.json` of the project you want to use it in:
 
@@ -50,7 +52,7 @@ Next, in your project's `package.json`, add a section called `bit-docs`, like:
   }
 ```
 
-If you created a new repo specifically to hold this bit-docs stuff, you may wish to add the codebases you will be documenting as normal `package.json` dependencies at this time. You will need to update the `bit-docs` glob pattern to be similar to what the StealJS website repo does:
+If you created a new repo specifically to hold this bit-docs stuff, you may wish to add the codebases you will be documenting as normal `package.json` devDependencies at this time. You will need to update the `bit-docs` glob pattern to be similar to what the StealJS website repo does:
 
 ```
     "glob": {
@@ -69,15 +71,15 @@ Under the hood, bit-docs uses `npm` to install the `dependencies` defined under 
 ./your-project/node_modules/bit-docs/lib/configure/node_modules
 ```
 
-Maintaining this nested `node_modules` directory gives `bit-docs` complete control over this subset of plugin packages, enabling you to do things like use the `-f` flag to completely delete and reinstall the plugin packages. The force flag is particularly useful after updating the dependency list to remove a plugin package (it must be removed from `node_modules` to not be included).
+Maintaining this nested `node_modules` directory gives `bit-docs` complete control over this subset of plugin packages, enabling things like the `-f` "force" flag to completely delete and reinstall the plugin packages. The force flag is particularly useful after updating the dependency list to remove a plugin package that has previously been installed (otherwise, that old dependency won't be removed from the nested `node_modules` and will still be included by bit-docs).
 
 Look at the `.gitignore` of this repo; you'll notice an entry for `lib/configure/node_modules/`, and entries for many other files that will be generated on the fly when `bit-docs` is run.
 
-Using npm under the hood means things like the `file://` syntax in the `bit-docs` configuration for `dependencies` is fair game, which can be useful for local debugging of bit-docs plugins.
+Using npm under the hood means things like the `file://` syntax for `dependencies` in the `bit-docs` configuration is fair game, which can be useful for local debugging of bit-docs plugins.
 
 ### Plugins
 
-There are four handlers that any given bit-docs plugin can hook into, and a plugin could hook into all of these actions at once, but following the unix philosophy, bit-docs plugins should strive to do one thing only, and do it well. Therefore, most plugins will only hook into one or two of these handlers to accomplish their intended task.
+There are four handlers that any given bit-docs plugin can hook into using a standardized `bit-docs.js` file in the root of the plugin's directory. A plugin could hook into all four of these actions at once but, following the unix philosophy, bit-docs plugins should strive to do one thing only, and do it well. Therefore, most plugins will only hook into one (or two) of these handlers to accomplish their intended task, but probably never all four.
 
 #### Finder
 
@@ -87,13 +89,13 @@ The default finder supports glob syntax, and should be sufficient for most use-c
 
 - <https://github.com/bit-docs/bit-docs-glob-finder>
 
-You might need to create a plugin that hooks into the `finder` handler if you're pulling source from a database or some other location not on the working filesystem.
+You might need to create a plugin that hooks into the `finder` handler if you're pulling source from a database, or some other location that's not the current working filesystem.
 
 ### Processor
 
-Plugins that hook into the `processor` handler augment how found files are processed.
+Plugins that hook into the `processor` handler may augment how found files are processed.
 
-By default, the following plugin is included by default in the core of bit-docs:
+The following plugin is always included by default in the core of bit-docs:
 
 - <https://github.com/bit-docs/bit-docs-process-tags>
 
@@ -121,7 +123,7 @@ For example, see these bit-docs plugins that output HTML files:
 
 #### Tag
 
-Plugins that hook into the "tag" handler add new tags like `@yourtag` to the default processing that bit-docs already does to source file comments.
+Plugins that hook into the `tag` handler add new tags like `@yourtag` to the default processing that bit-docs already does to source-file comments.
 
 For example, see these bit-docs plugins for prettifying source-code snippets:
 

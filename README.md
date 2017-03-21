@@ -151,17 +151,6 @@ Take a look at `bit-docs-html-toc`'s [`bit-docs.js`](https://github.com/bit-docs
 
 Find more plugins at the [bit-docs organization on GitHub](https://github.com/bit-docs).
 
-## Program Flow
-
-When bit-docs gets run, the following flow happens:
-
-- `bit-docs/bin/bit-docs` is triggered, and passed command flags are parsed as options.
-	- Next, the module export in `main.js` is called with the `package.json` path and options.
-- `main.js` uses `lib/configure/configure.js` to get a `siteConfig` which is passed to `lib/generate/generate.js`.
-	- `configure.js` will install plugin packages defined in the `bit-docs` section of `package.json`.
-	- Next, `configure.js` will allow each installed plugin to register itself to whatever handlers.
-- `generate.js` takes that configuration and passes it to those plugins registered as "generator" plugins.
-
 ## Contributing
 
 Want to help make `bit-docs` even better? See [`CONTRIBUTING.md`](CONTRIBUTING.md).

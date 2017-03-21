@@ -87,7 +87,7 @@ Finder plugins find files to slurp in; see the default finder:
 
 #### Generators
 
-Generators work in tandem building finalized files to spit out:
+Generator plugins build finalized files to be spit out:
 
 - <https://github.com/bit-docs/bit-docs-generate-html>
 - <https://github.com/bit-docs/bit-docs-html-toc>
@@ -101,6 +101,15 @@ Modifier plugins add non-critical functionality, such as making the output prett
 - <https://github.com/bit-docs/bit-docs-html-highlight-line>
 
 Find more plugins at the [bit-docs organization on GitHub](https://github.com/bit-docs).
+
+## Program Flow
+
+When bit-docs gets run, the following flow happens:
+
+- `bit-docs/bin/bit-docs` is triggered and passed flags are parsed as options.
+	- Next, the module export in `main.js` is called with the `package.json` path and options.
+- `main.js` uses `lib/configure/configure.js` to get a `siteConfig` which is passed to `lib/generate/generate.js`.
+- `generate.js` takes that configuration and passes it to those plugins registered as "generator" plugins.
 
 ## Contributing
 

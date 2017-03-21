@@ -31,4 +31,5 @@ Tests are located in [`test.js`][], at the root of this repo.
 
 [Our forums](http://forums.donejs.com) and [Gitter chat](https://gitter.im/donejs/donejs) are the best places to ask questions.
 
+[`package.json`]: package.json
 [`test.js`]: test.js

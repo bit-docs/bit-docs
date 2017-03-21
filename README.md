@@ -130,7 +130,6 @@ Plugins that hook into the `generator` handler output something from the process
 For example, see these bit-docs plugins that output HTML files:
 
 - <https://github.com/bit-docs/bit-docs-generate-html>
-- <https://github.com/bit-docs/bit-docs-html-toc>
 - <https://github.com/bit-docs/bit-docs-generate-readme>
 
 #### Tag
@@ -141,6 +140,14 @@ For example, see these bit-docs plugins for prettifying source-code snippets:
 
 - <https://github.com/bit-docs/bit-docs-prettify>
 - <https://github.com/bit-docs/bit-docs-html-highlight-line>
+
+#### Plugins that Hook into Other Plugins
+
+The previously mentioned `bit-docs-generate-html` is a "generator" plugin but also accepts hooks into itself, which allows the following plugin to add functionality to that plugin:
+
+- <https://github.com/bit-docs/bit-docs-html-toc>
+
+Take a look at `bit-docs-html-toc`'s [`bit-docs.js`](https://github.com/bit-docs/bit-docs-html-toc/blob/master/bit-docs.js) file to see how a plugin registers itself with another plugin.
 
 Find more plugins at the [bit-docs organization on GitHub](https://github.com/bit-docs).
 

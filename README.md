@@ -52,7 +52,7 @@ Next, in your project's `package.json`, add a section called `bit-docs`, like:
   }
 ```
 
-If you created a new repo specifically to hold this bit-docs stuff, you may wish to add the codebases you will be documenting as normal `package.json` devDependencies at this time. You will need to update the `bit-docs` glob pattern to be similar to what the StealJS website repo does:
+If you created a new repo specifically to hold this bit-docs stuff, you may wish to add the codebases you will be documenting as normal `package.json` devDependencies at this time. You will need to update the `bit-docs` glob pattern to be similar to what the StealJS website repo does (to tell the glob finder to look in `node_modules` for files to process):
 
 ```
     "glob": {
@@ -65,7 +65,7 @@ If you created a new repo specifically to hold this bit-docs stuff, you may wish
 	},
 ```
 
-Under the hood, bit-docs uses `npm` to install the `dependencies` defined under the `bit-docs` configuration in `package.json`. However, instead of installing packages into your project's top-level `node_modules`, bit-docs uses npm to install plugin packages to it's own directory:
+Under the hood, bit-docs uses `npm` to install the `dependencies` defined under the `bit-docs` configuration in `package.json`. However, instead of installing packages into your project's top-level `node_modules`, bit-docs utilizes npm to install plugin packages to it's own directory:
 
 ```
 ./your-project/node_modules/bit-docs/lib/configure/node_modules
@@ -73,9 +73,11 @@ Under the hood, bit-docs uses `npm` to install the `dependencies` defined under 
 
 Maintaining this nested `node_modules` directory gives `bit-docs` complete control over this subset of plugin packages, enabling things like the `-f` "force" flag to completely delete and reinstall the plugin packages. The force flag is particularly useful after updating the dependency list to remove a plugin package that has previously been installed (otherwise, that old dependency won't be removed from the nested `node_modules` and will still be included by bit-docs).
 
-Look at the `.gitignore` of this repo; you'll notice an entry for `lib/configure/node_modules/`, and entries for many other files that will be generated on the fly when `bit-docs` is run.
+Look at the `.gitignore` of this repo; you'll notice an entry for `lib/configure/node_modules/`, and entries for other directories that will be generated on the fly when `bit-docs` is run.
 
-Using npm under the hood means things like the `file://` syntax for `dependencies` in the `bit-docs` configuration is fair game, which can be useful for local debugging of bit-docs plugins.
+Utilization of npm under the hood means things like the `file://` syntax for `dependencies` in the `bit-docs` configuration is fair game, which can be useful for local debugging of bit-docs plugins.
+
+For more information on developing locally, see [`CONTRIBUTING.md`](CONTRIBUTING.md).
 
 ### Plugins
 
@@ -83,7 +85,7 @@ There are four handlers that any given bit-docs plugin can hook into using a sta
 
 #### Finder
 
-Plugins that hook into the `finder` handler affect how bit-docs searches for source files.
+Plugins that hook into the `finder` handler affect how bit-docs searches for source-files.
 
 The default finder supports glob syntax, and should be sufficient for most use-cases:
 
@@ -99,13 +101,23 @@ The following plugin is always included by default in the core of bit-docs:
 
 - <https://github.com/bit-docs/bit-docs-process-tags>
 
-This is because that plugin provides the extremely common task of processing "tags". A tag is an identifier, usually embedded in source code comments, that provides documentation or information about some functionality, inline in the source code itself. Some default tags are:
+This is because that plugin provides the extremely common task of processing "tags". A tag is an identifier, usually embedded in source code comments, that provides documentation or information about some functionality, inline in the source code itself. Some of the many default tags are `@function @parent @description @body`, used in a source-file like:
 
-- `@add`
-- `@body`
-- `@description`
-- `@hide`
-- `@parent`
+```js
+/**
+ * @function yourproject.hellofunc hellofunc
+ * @parent YourProject.apis
+ * @description
+
+ * This documents something in a sub-page of YourProject.
+ *
+ * @body
+ *
+ * ## Usage
+ *
+ * Explain how to use it in _markdown_!
+ */
+```
 
 For an example of a processor plugin that's not included by default, see:
 

@@ -2,16 +2,11 @@
 
 Loosely based on ideas and lessons learned from [DocumentJS](http://documentjs.com), bit-docs is an evolving set of tools that allow you to:
 
- - Write documentation inline or in markdown files.
+ - Write documentation inline, or in markdown files.
  - Specify your code's behavior precisely with JSDoc
    and [Google Closure Compiler](https://github.com/google/closure-compiler/wiki/Annotating-JavaScript-for-the-Closure-Compiler)
    annotations.
-
-## Projects currently using bit-docs
-
- - [CanJS](https://github.com/canjs/canjs)
- - [StealJS](https://github.com/stealjs/stealjs)
- - [DoneJS](https://github.com/donejs/donejs)
+- Generate a ready-to-publish website from that documentation.
 
 ## High-Level Overview
 
@@ -21,11 +16,21 @@ Depending on what plugins are used, input may be in the form of inline code comm
 
 You could write "finder" and "generator" plugins for the `bit-docs` tool to orchestrate that are geared towards static site generation (such as a blog or generic website), but `bit-docs` is particularly useful for generating documention websites from your code projects.
 
+### Projects currently using bit-docs
+
+ - [CanJS](https://github.com/canjs/canjs) — [Generated website](http://canjs.com)
+ - [StealJS](https://github.com/stealjs/stealjs) — [Generated website](http://stealjs.com)
+ - [DoneJS](https://github.com/donejs/donejs) — [Generated website](http://donejs.com)
+
 ### Usage 
 
-To use bit-docs, you add it to the `package.json` of the project you want to use it with.
+To use bit-docs, add it to the `package.json` of the project you want to use it with:
 
-Next, in your project's `package.json`, you add a section called `bit-docs`, like:
+```
+npm install bit-docs --save-dev
+```
+
+Next, in your project's `package.json`, add a section called `bit-docs`, like:
 
 ```
   "bit-docs": {
@@ -81,3 +86,9 @@ Modifier plugins add non-critical functionality, such as making the output prett
 - <https://github.com/bit-docs/bit-docs-html-highlight-line>
 
 Find more plugins at the [bit-docs organization on GitHub](https://github.com/bit-docs).
+
+## Contributing
+
+Want to help make `bit-docs` even better? See [`CONTRIBUTING.md`](CONTRIBUTING.md).
+
+Looking for a changelog? Try the [releases page on GitHub](https://github.com/bit-docs/bit-docs/releases).

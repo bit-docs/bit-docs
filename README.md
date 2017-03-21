@@ -20,11 +20,13 @@ You could write "finder" and "generator" plugins for the `bit-docs` tool to orch
 
  - [CanJS](https://github.com/canjs/canjs) — [Generated website](http://canjs.com)
  - [StealJS](https://github.com/stealjs/stealjs) — [Generated website](http://stealjs.com)
- - [DoneJS](https://github.com/donejs/donejs) — [Generated website](http://donejs.com)
+ - [DoneJS](https://github.com/donejs/donejs-next) — [Generated website](https://donejs.github.io/donejs-next)
 
 ### Usage 
 
-To use bit-docs, add it to the `package.json` of the project you want to use it with:
+It is possible to add bit-docs as a dependency to the actual repo you wish to document, but we have found creating an entirely new repo that will pull in the repo(s) that you wish to document is a better paradigm. It is especially useful to have a repository dedicated to generating documentation with bit-docs when pulling in multiple codebases, perhaps including their multiple versions, and wishing to generate a unified website. This is the strategy used by StealJS and DoneJS.
+
+To use bit-docs, add it to the `package.json` of the project you want to use it in:
 
 ```
 npm install bit-docs --save-dev
@@ -46,6 +48,19 @@ Next, in your project's `package.json`, add a section called `bit-docs`, like:
     "parent": "indexfile",
     "minifyBuild": false
   }
+```
+
+If you created a new repo specifically to hold this bit-docs stuff, you may wish to add the codebases you will be documenting as normal `package.json` dependencies at this time. You will need to update the `bit-docs` glob pattern to be similar to what the StealJS website repo does:
+
+```
+    "glob": {
+      "pattern": "{node_modules,doc}/{steal,grunt-steal,steal-*}/**/*.{js,md}",
+      "ignore": [
+        "node_modules/steal/test/**/*",
+        "node_modules/steal-tools/test/**/*",
+        "node_modules/steal-conditional/{demo,test,node_modules}/**/*"
+      ]
+	},
 ```
 
 Under the hood, bit-docs uses `npm` to install the `dependencies` defined under the `bit-docs` configuration in `package.json`. However, instead of installing packages into your project's top-level `node_modules`, bit-docs uses npm to install plugin packages to it's own directory:

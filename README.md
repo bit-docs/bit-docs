@@ -19,11 +19,11 @@ Fundamentally, the `bit-docs` tool (this repo) orchestrates "finder" plugins tha
 
 Depending on what plugins are used, input may be in the form of inline code comments, markdown files, or anything else you could imagine; output may be in the form of HTML, or any other format.
 
-Technically you could write "finder" and "generator" plugins for the `bit-docs` tool to orchestrate that are geared towards static site generation (such as a blog or generic website), but `bit-docs` is particularly useful for generating documention websites for your code projects.
+You could write "finder" and "generator" plugins for the `bit-docs` tool to orchestrate that are geared towards static site generation (such as a blog or generic website), but `bit-docs` is particularly useful for generating documention websites from your code projects.
 
 ### Usage 
 
-To use `bit-docs`, you add it to the `package.json` of the project you want to use it with.
+To use bit-docs, you add it to the `package.json` of the project you want to use it with.
 
 Next, in your project's `package.json`, you add a section called `bit-docs`, like:
 
@@ -43,41 +43,41 @@ Next, in your project's `package.json`, you add a section called `bit-docs`, lik
   }
 ```
 
-Under the hood, when you run the `bit-docs` command, it uses `npm` to install the dependencies defined under `bit-docs` configuration in `package.json`. Instead of installing the packages into your project's top-level `node_modules`, it installs the packages to, for example:
+Under the hood, bit-docs uses `npm` to install the `dependencies` defined under the `bit-docs` configuration in `package.json`. However, instead of installing packages into your project's top-level `node_modules`, bit-docs uses npm to install plugin packages to it's own directory:
 
 ```
 ./your-project/node_modules/bit-docs/lib/configure/node_modules
 ```
 
-Notice that bit-docs is maintaining it's own `node_modules` directory.
+Maintaining this nested `node_modules` directory gives `bit-docs` complete control over this subset of plugin packages, enabling you to do things like use the `-f` flag to completely delete and reinstall the plugin packages. The force flag is particularly useful after updating the dependency list to remove a plugin package (it must be removed from `node_modules` to not be included).
 
-This is so that `bit-docs` has complete control over this subset of plugin packages, for when we need to do things like use the `-f` flag to completely delete and reinstall the plugins. It is particularly necessary to use the force flag after removing a package from the dependency list, to clear it out.
+Look at the `.gitignore` of this repo; you'll notice an entry for `lib/configure/node_modules/`, and entries for many other files that will be generated on the fly when `bit-docs` is run.
 
-To drive home this point, look at the `.gitignore` of this repo; you'll notice an entry for `lib/configure/node_modules/`, as well as entries for many other files that will be generated on the fly and stored within when `bit-docs` is run.
-
-You can use the npm `file://` syntax in the `bit-docs` configuration for `dependencies` thanks to the fact that it uses npm under the hood. This is an important point for local debugging of your bit-docs plugins.
+Using npm under the hood means things like the `file://` syntax in the `bit-docs` configuration for `dependencies` is fair game, which can be useful for local debugging of bit-docs plugins.
 
 ### Types of Plugins
 
-There are two types of plugins; "finders" and "generators".
+There are two primary types of plugins: "finders" and "generators".
 
 #### Finders
 
-Finder plugins find files to slurp in. See the default finder:
+Finder plugins find files to slurp in; see the default finder:
 
 - <https://github.com/bit-docs/bit-docs-glob-finder>
 
 #### Generators
 
-Generators work together creating new files to spit out:
+Generators work in tandem building finalized files to spit out:
 
 - <https://github.com/bit-docs/bit-docs-generate-html>
 - <https://github.com/bit-docs/bit-docs-html-toc>
 - <https://github.com/bit-docs/bit-docs-generate-readme>
 
-#### Supplemental Plugins
+#### Modifiers
 
-There are also plugins that add non-critical functionality such as:
+Modifier plugins add non-critical functionality, such as making the output pretty:
 
 - <https://github.com/bit-docs/bit-docs-prettify>
 - <https://github.com/bit-docs/bit-docs-html-highlight-line>
+
+Find more plugins at the [bit-docs organization on GitHub](https://github.com/bit-docs).

@@ -23,7 +23,6 @@
     "release:major": "npm version major && npm publish"
   },
   "devDependencies": {
-    "bit-docs-glob-finder": "0.0.6",
     "connect": "^2.14.4",
     "mocha": ">= 1.18.0",
     "qunit-mocha-ui": "*",

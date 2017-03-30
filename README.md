@@ -93,7 +93,7 @@ The default finder supports glob syntax, and should be sufficient for most use-c
 
 You might need to create a plugin that hooks into the `finder` handler if you're pulling source from a database, or some other location that's not the current working filesystem.
 
-### Processor
+#### Processor
 
 Plugins that hook into the `processor` handler may augment how found files are processed.
 
@@ -141,7 +141,7 @@ For example, see these bit-docs plugins for prettifying source-code snippets:
 - <https://github.com/bit-docs/bit-docs-prettify>
 - <https://github.com/bit-docs/bit-docs-html-highlight-line>
 
-#### Plugins that Hook into Other Plugins
+### Plugins that Hook into Other Plugins
 
 The previously mentioned `bit-docs-generate-html` is a "generator" plugin but also accepts hooks into itself, which allows the following plugin to add functionality to that plugin:
 

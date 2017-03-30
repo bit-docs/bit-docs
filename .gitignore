@@ -19,3 +19,4 @@ lib/generators/html/test/tmp/
 test/doc/
 .DS_Store
 .DS_Store?
+doc/

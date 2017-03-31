@@ -14,8 +14,12 @@ var argv = yargs
 	.string("_")
 
 	.alias("f","forceBuild")
-	.describe("f","Force rebuilding the templates, js, and css.")
+	.describe("f","Force redownloading of plugins and rebuilding the templates, js, and css.")
 	.boolean("f")
+
+	.alias("c","cacheBust")
+	.describe("c","Bust cached templates, js, and css.")
+	.boolean("c")
 
 	.alias("d","debug")
 	.describe("d","Turn on debugging output.")

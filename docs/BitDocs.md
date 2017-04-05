@@ -1,5 +1,7 @@
 @page BitDocs BitDocs
 
-@description Hello WORLD!!
+@description An evolving set of tools for the generation of documentation websites.
 
-@body BODY
+@body
+
+Welcome to bit-docs.

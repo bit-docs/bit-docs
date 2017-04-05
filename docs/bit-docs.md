@@ -1,5 +1,5 @@
 @module {function} bit-docs
-@parent BitDocs
+@parent plugins
 
 @description Find files, process them, and produce some sort of output.
 
@@ -7,4 +7,4 @@
 
 @body
 
-Blah blah
+TBD

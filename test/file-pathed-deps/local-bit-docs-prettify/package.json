@@ -1,0 +1,6 @@
+{
+  "name": "local-bit-docs-prettify",
+  "version": "0.0.1",
+  "description": "local pretty",
+  "main": "prettify.js"
+}

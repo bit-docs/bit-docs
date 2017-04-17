@@ -1,0 +1,16 @@
+{
+  "bit-docs": {
+    "dependencies": {
+      "bit-docs-glob-finder": "^0.0.5",
+      "bit-docs-dev": "^0.0.3",
+      "bit-docs-js": "^0.0.3",
+      "bit-docs-generate-html": "^0.0.3",
+	  "local-bit-docs-prettify": "file:../local-bit-docs-prettify"
+    },
+    "glob": {
+      "pattern": "**/*.{js,md}"
+    },
+    "minifyBuild": false,
+    "parent": "hello-world"
+  }
+}

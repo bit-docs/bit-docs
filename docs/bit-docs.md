@@ -1,5 +1,7 @@
-@module {function} bit-docs
 @parent plugins
+@module {function} bit-docs
+@group bit-docs/types types
+@group bit-docs/modules modules
 
 @description Find files, process them, and produce some sort of output.
 

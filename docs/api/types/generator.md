@@ -1,5 +1,5 @@
 @parent bit-docs/types
-@typedef {function()} bit-docs/types/generator generator
+@typedef {function()} bit-docs/types/generator Generator
 
 A generator module should produce a function that takes the following shape.
 Generator modules are used to produce some form of documentation output.
@@ -19,7 +19,7 @@ resolve with a map of all [bit-docs/types/docObject] keyed by their name.
 ## Use
 
 The following exports a generator function that builds a JSON output of the
-docObject:
+[bit-docs/types/docObject]:
 
     var Q = require('q'),
         fs = require('fs'),

@@ -9,4 +9,5 @@
 
 @body
 
-TBD
+This package provides the command-line interface for bit-docs, and is what
+ties all the plugins together.

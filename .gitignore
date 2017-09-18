@@ -1,3 +1,4 @@
+package-lock.json
 test/docs/*
 dist
 production.js

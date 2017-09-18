@@ -1,8 +1,8 @@
 @parent bit-docs/types
 @typedef {{on: function(String), cwd: String}} bit-docs/types/FileEventEmitter FileEventEmitter
 
-A [node event emitter](https://nodejs.org/api/events.html#events_class_eventemitter)
-that emits an event for every file that should be processed.
+[Node.js EventEmitter](https://nodejs.org/api/events.html#events_class_eventemitter)
+that emits an event with [bit-docs/types/fileSource] for every file found.
 
 @option {String} cwd The root directory where "match" events are relative to.
 

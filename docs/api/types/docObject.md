@@ -5,49 +5,44 @@
 
 An object that represents something that is documented.
 
-Any property added to a [bit-docs/types/docObject] is available to the
-templates and the client.
-
-The following lists the important, near universal properties:
-
 @option {String} name The unique name of the object being documented.
 
-@option {String} type The type of the DocType. This typically represents the
-type of the object being documented:
-
- - `constructor`
- - `prototype`
- - `static`
- - `function`
- - `property`
- - `typedef`
- - `module`
+@option {bit-docs/types/docType} type The "type" of [bit-docs/types/docObject].
 
 @option {String} parent The name of the parent [bit-docs/types/docObject].
 
-@option {String} description The description html content specified by
-[bit-docs-process-tags/tags/description]. This should typically be one or two
-sentences.
+@option {String} description Markdown content specified by
+[bit-docs-process-tags/tags/description]. Used in link title attributes so
+keep it short.
 
-@option {String} body The body html content specified by
-[bit-docs-process-tags/tags/body].
+@option {String} body Markdown content specified by
+[bit-docs-process-tags/tags/body]. Can be as many lines as needed.
 
 @option {Array.<String>} children An array of children names. This typically
 gets added by the system based on the `parent` property.
 
 @option {Array<{version: String, description: String}>} deprecated An array of
-deprecated warnings created by [bit-docs-dev/tags/deprecated].
+deprecated warnings specified by [bit-docs-dev/tags/deprecated].
 
 @body
 
 ## Use
+
+Any property added to a [bit-docs/types/docObject] is available to the
+templates and the client.
+
+Plugins add arbitrary properties to the [bit-docs/types/docObject] so it's not
+possible to document them all.
+
+The options documented above are the properties [bit-docs/types/docObject] is
+most likely to have.
 
 You can see a page's [bit-docs/types/docObject] by typing `docObject` in the
 console.
 
 Here is an example of the `docObject` for this page:
 
-```js
+@codestart javascript
 {
   "src":{
     "path":"docs/modules/bit-docs/docs/api/types/docObject.md"
@@ -166,4 +161,4 @@ Here is an example of the `docObject` for this page:
   "comment":" ",
   "pathToRoot":"../../.."
 }
-```
+@codeend

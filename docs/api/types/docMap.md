@@ -1,8 +1,12 @@
 @parent bit-docs/types
 @typedef {Object<String,bit-docs/types/docObject>} bit-docs/types/docMap DocMap
 
-An object that contains every [bit-docs/types/docObject] keyed by the
-[bit-docs/types/docObject]'s name.
+@description An object that contains every [bit-docs/types/docObject] keyed
+by the [bit-docs/types/docObject]'s name.
+
+@body
+
+## Use
 
 Example of a docMap:
 

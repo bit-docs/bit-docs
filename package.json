@@ -30,7 +30,7 @@
   },
   "dependencies": {
     "async": "~0.2.7",
-    "bit-docs-process-tags": "^0.0.5",
+    "bit-docs-process-tags": "pre",
     "chokidar": "^1.0.0-rc5",
     "cross-spawn-async": "^2.1.9",
     "enpeem": "^2.1.0",

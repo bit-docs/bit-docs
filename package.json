@@ -14,7 +14,8 @@
     "bit-docs": "./bin/bit-docs"
   },
   "scripts": {
-    "test": "mocha test.js --reporter spec",
+    "jshint": "jshint *.js lib/*.js tasks/*.js test/*.js --config",
+    "test": "npm run jshint && mocha test.js --reporter spec",
     "preversion": "npm test",
     "publish": "git push origin && git push origin --tags",
     "release:prerelease": "npm version prerelease && npm publish",
@@ -24,6 +25,7 @@
   },
   "devDependencies": {
     "connect": "^2.14.4",
+    "jshint": "^2.9.5",
     "mocha": ">= 1.18.0",
     "qunit-mocha-ui": "*",
     "rimraf": "2.1"

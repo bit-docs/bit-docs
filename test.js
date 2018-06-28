@@ -1,4 +1,3 @@
-var assert = require("assert");
 var docjs = require("./main.js");
 var path = require("path");
 

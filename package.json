@@ -47,10 +47,10 @@
   "system": {
     "npmDependencies": []
   },
-  "homepage": "http://documentjs.com",
+  "homepage": "https://github.com/bit-docs/bit-docs",
   "repository": {
     "type": "git",
-    "url": "git://github.com/bitovi/documentjs.git"
+    "url": "git://github.com/bit-docs/bit-docs.git"
   },
   "license": "MIT",
   "licenses": [
@@ -58,21 +58,5 @@
       "type": "MIT",
       "url": "http://opensource.org/licenses/mit-license.php"
     }
-  ],
-  "bit-docs": {
-    "dependencies": {
-      "bit-docs-glob-finder": "^0.0.5",
-      "bit-docs-dev": "^0.0.3",
-      "bit-docs-js": "^0.0.6",
-      "bit-docs-tag-sourceref": "^0.0.3",
-      "bit-docs-generate-html": "^0.4.0",
-      "bit-docs-prettify": "^0.1.1",
-      "bit-docs-html-highlight-line": "^0.2.2"
-    },
-    "glob": {
-      "pattern": "{node_modules/bit-docs-*,docs}/**/*.{js,md}"
-    },
-    "parent": "BitDocs",
-    "minifyBuild": false
-  }
+  ]
 }

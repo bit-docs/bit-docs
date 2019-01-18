@@ -25,6 +25,10 @@ var argv = yargs
 	.describe("t","Test the finder's output.")
 	.boolean("t")
 
+	.alias("w","watch")
+	.describe("w","Watch mode.")
+	.boolean("w")
+
 	.describe("makeDocMap","Create a docMap.json only")
 	.boolean("makeDocMap")
 

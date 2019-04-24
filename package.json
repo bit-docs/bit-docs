@@ -47,7 +47,7 @@
   "system": {
     "npmDependencies": []
   },
-  "homepage": "http://documentjs.com",
+  "homepage": "https://bit-docs.github.io/bit-docs-website/",
   "repository": {
     "type": "git",
     "url": "git://github.com/bitovi/documentjs.git"

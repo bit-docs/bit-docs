@@ -29,6 +29,10 @@ var argv = yargs
 	.describe("w","Watch mode.")
 	.boolean("w")
 
+	.alias("s","skipInstall")
+	.describe("s","Skip installing packages. Use with -f.")
+	.boolean("s")
+
 	.describe("makeDocMap","Create a docMap.json only")
 	.boolean("makeDocMap")
 
